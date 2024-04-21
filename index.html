@@ -194,18 +194,29 @@
         this.ants = ants.map(name => ({ name, health: 100 }))
       }
       work() {
-        if (this.ants.length === 0) return "No ants here. Did you work them to death?"
-        this.ants.forEach(ant => ant.health -= 20)
-        this.ants = this.ants.filter(ant => ant.health > 0)
-        return `${this.ants.length} ants starting work!`
+        const antCounts = this.ants.length
+        if (!antCounts) {return "No ants here. Did you work them to death?"}
+        this.ants.map(ant => {
+          ant.health -= 20 
+        return ant})
+        this.ants = this.ants.filter(ant => {
+          return ant.health > 0})
+        return `${antCounts} ants starting work!`
       }
       feed(name) {
-        const ant = this.ants.find(ant => ant.name === name)
-        if (!ant) return `${name} not found!`
-        ant.health += 15
-        return "Yum!"
+        let counter = 0
+        this.ants = this.ants.map(ant => {
+         if (ant.name === name){
+            counter++
+            ant.health += 15
+         }
+        return ant
+        })
+        return counter ? "Yum!" : `${name} not found!`
       }
     }
+    console.log(new AntFarm('Jess', 'Blake', 'Jess').feed('Jess'))
+
 
     // 🧪 TESTS, do not make any changes below this line ===================
     // 🧪 TESTS, do not make any changes below this line ===================
